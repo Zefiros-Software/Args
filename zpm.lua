@@ -28,6 +28,7 @@ workspace "Args"
 
     cppdialect "C++14"
         
-    zefiros.setDefaults("args", {
-        mayLink = false
-    })
+    zefiros.setDefaults("args")
+
+    project "args"
+        zpm.uses "Zefiros-Software/ProgramOptions"

@@ -24,7 +24,6 @@
  * @endcond
  */
 
-#include "preproc/preproc.h"
 
 #include "gtest/gtest.h"
 
@@ -41,12 +40,6 @@ TEST(Test, Example)
     throw "";
 #endif
 }
-
-TEST(Test, Compiler)
-{
-    ASSERT_FALSE(Compiler::IsBorland());
-}
-
 int main(int argc, char **argv)
 {
 

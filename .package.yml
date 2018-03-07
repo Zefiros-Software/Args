@@ -1,8 +1,6 @@
-
-public: 
-  libraries:
-    - name: Zefiros-Software/ProgramOptions
-      version: '>=0.1.0 || @head'
+libraries:
+  - name: Zefiros-Software/ProgramOptions
+    version: '>=0.1.0 || @head'
 development:
   modules:
     - name: Zefiros-Software/Defaults
