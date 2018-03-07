@@ -25,21 +25,27 @@
  */
 
 
+#include "args/args.h"
+#include "args/option.h"
+
 #include "gtest/gtest.h"
 
 #include <stdlib.h>
 
 TEST(Test, Example)
 {
-#if IS_X86_32
-    std::cout << "This is 32 bits!" << std::endl;
-#elif IS_X86_64
-    std::cout << "This is 64 bits!" << std::endl;
+    char *argv[] = { "program name", "--name", "3", NULL };
+    int argc = sizeof(argv) / sizeof(char*) - 1;
 
-#else
-    throw "";
-#endif
+    Args args;
+    Option opt;
+    //opt.callback = [] { std::cout << "hello" << std::endl; };
+    opt.callback = [] (std::uint32_t u) { std::cout << "world" << u << std::endl; };
+    args.AddOption(opt);
+
+    args.Parse(argc, argv);
 }
+
 int main(int argc, char **argv)
 {
 

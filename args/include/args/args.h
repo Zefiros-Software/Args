@@ -29,6 +29,8 @@
 #ifndef __ARGS_H__
 #define __ARGS_H__
 
+#include "args/option.h"
+
 #include <iosfwd>
 
 namespace po
@@ -42,10 +44,11 @@ public:
 
     Args();
 
-    bool Parse(int int_argc, char** argv)
-    {
-        return mParser->operator()(int_argc, argv);
-    }
+    virtual ~Args();
+
+    bool AddOption(Option &option);
+
+    bool Parse(int int_argc, char** argv);
 
     bool IsVerbose();
 
