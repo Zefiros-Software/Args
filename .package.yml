@@ -1,6 +1,7 @@
-libraries:
-  - name: Zefiros-Software/ProgramOptions
-    version: '>=0.1.0 || @head'
+public:
+  libraries:
+    - name: Zefiros-Software/cxxopts
+      version: '>=2.0.0 || @head'
 development:
   modules:
     - name: Zefiros-Software/Defaults

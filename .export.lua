@@ -31,5 +31,5 @@ project "Args"
         includedirs "args/include/"
         cppdialect "C++14"
 
-        zpm.uses "Zefiros-Software/ProgramOptions"
+        zpm.uses "Zefiros-Software/cxxopts"
     ]]

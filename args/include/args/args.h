@@ -31,37 +31,48 @@
 
 #include "args/option.h"
 
+#include <unordered_map>
+#include <string_view>
 #include <iosfwd>
 
-namespace po
+namespace cxxopts
 {
-    class parser;
+    class Options;
 }
+
 
 class Args
 {
 public:
 
-    Args();
+    Args(std::string_view programName, std::string_view description = "");
 
     virtual ~Args();
 
-    bool AddOption(Option &option);
+    bool AddOptions(std::string_view group, std::vector<Option> &&options);
 
-    bool Parse(int int_argc, char** argv);
+    bool AddOptions(std::vector<Option> &&options);
 
-    bool IsVerbose();
+    bool AddOption(Option &option, std::string_view group = "");
 
-    bool IsSilent();
+    void Parse(int int_argc, char** argv);
 
-    bool IsValid();
-
-    void SetSilent();
-
-    void SetVerbose(std::ostream& destination);
+//     bool IsVerbose() const;
+// 
+//     bool IsSilent() const;
+// 
+//     bool IsValid() const;
+// 
+//     void SetSilent();
+// 
+//     void SetVerbose(std::ostream& destination);
+// 
+//     const Option &GetOption(std::string_view argument) const;
 
 private:
-    po::parser *mParser;
+    cxxopts::Options *mParser;
+
+    std::unordered_map<std::string_view, ::Option> mOptions;
 };
 
 

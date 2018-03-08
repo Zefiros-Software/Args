@@ -26,9 +26,12 @@
 
 workspace "Args"
 
-    cppdialect "C++14"
+    cppdialect "C++17"
         
     zefiros.setDefaults("args")
 
     project "args"
-        zpm.uses "Zefiros-Software/ProgramOptions"
+        zpm.uses "Zefiros-Software/cxxopts"
+
+    project "args-test"
+        zpm.uses "Zefiros-Software/cxxopts"
