@@ -105,7 +105,20 @@ TEST(Test, Example6)
 
     Args args("program name");
     args.AddOptions({
-        { { "f", "name" }, "weff wefwef", Option::U32(), std::nullopt, "321"}
+        { { "f", "name" }, "weff wefwef", Option::U32(), std::nullopt, "321" }
+        });
+
+    args.Parse(argc, argv);
+}
+
+TEST(Test, Example7)
+{
+    char *argv[] = { "program name", "--help", NULL };
+    int argc = sizeof(argv) / sizeof(char *) - 1;
+
+    Args args("program name");
+    args.AddOptions({
+        { { "f", "name" }, "weff wefwef", "help", Option::U32(), "321" }
         });
 
     args.Parse(argc, argv);

@@ -60,6 +60,7 @@ public:
     //std::shared_ptr<cxxopts::Value> type;
     std::string_view argument;
     std::string_view description;
+    std::optional<std::string_view> argHelp;
     std::optional<std::string_view> abbreviation;
 
 
@@ -69,9 +70,10 @@ public:
     //std::variant<std::monostate, fvoid, fi32, fi64, fu32, fu64, ff32, ff64> callback;
     std::any fallback;
     std::shared_ptr<cxxopts::Value> type;
-    
+
     Option(std::string_view argument, std::string_view description, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
         : argument(argument),
+        description(description),
         abbreviation(std::nullopt),
         type(type)
     {
@@ -87,6 +89,41 @@ public:
 
     Option(std::pair<std::string_view, std::string_view> argument, std::string_view description, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
         : argument(argument.second),
+        description(description),
+        abbreviation(argument.first),
+        type(type)
+    {
+        if (defaultValue.has_value())
+        {
+            this->defaultValue = defaultValue.value();
+        }
+        if (implicitValue.has_value())
+        {
+            this->implicitValue = implicitValue.value();
+        }
+    }
+
+    Option(std::string_view argument, std::string_view description, std::string_view argHelp, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
+        : argument(argument),
+        description(description),
+        argHelp(argHelp),
+        abbreviation(std::nullopt),
+        type(type)
+    {
+        if (defaultValue.has_value())
+        {
+            this->defaultValue = defaultValue.value();
+        }
+        if (implicitValue.has_value())
+        {
+            this->implicitValue = implicitValue.value();
+        }
+    }
+
+    Option(std::pair<std::string_view, std::string_view> argument, std::string_view description, std::string_view argHelp, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
+        : argument(argument.second),
+        description(description),
+        argHelp(argHelp),
         abbreviation(argument.first),
         type(type)
     {

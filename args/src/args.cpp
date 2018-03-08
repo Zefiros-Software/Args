@@ -70,7 +70,7 @@ bool Args::AddOption(Option &option, std::string_view group /*= ""*/)
         std::string(option.abbreviation.value_or("")), 
         std::string(option.argument), 
         std::string(option.description), 
-        type, "\0");
+        type, std::string(option.argHelp.value_or("\0")));
 
     /*
     po::option &popt = mParser->operator[](std::string(option.argument));
