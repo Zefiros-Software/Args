@@ -55,24 +55,17 @@ public:
 
     bool AddOption(Option &option, std::string_view group = "");
 
+    void SetPositional(std::vector<std::string> &&positional, std::optional<std::string_view> positionalHelp = std::nullopt);
+
     void Parse(int int_argc, char** argv);
 
-//     bool IsVerbose() const;
-// 
-//     bool IsSilent() const;
-// 
-//     bool IsValid() const;
-// 
-//     void SetSilent();
-// 
-//     void SetVerbose(std::ostream& destination);
-// 
-//     const Option &GetOption(std::string_view argument) const;
+    OptionValue GetOption(std::string_view argument) const;
+
+    std::vector< std::pair< std::string_view, OptionValue > > GetArguments();
 
 private:
     cxxopts::Options *mParser;
-
-    std::unordered_map<std::string_view, ::Option> mOptions;
+    cxxopts::ParseResult *mResults;
 };
 
 

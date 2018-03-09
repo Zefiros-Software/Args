@@ -2,29 +2,44 @@
 #ifndef __OPTIONS_H__
 #define __OPTIONS_H__
 
-#include "cxxopts.hpp"
-
 #include <functional>
 #include <optional>
 #include <variant>
 #include <any>
 
+#define CXXOPTS_HAS_OPTIONAL
+#include "cxxopts.hpp"
 
-// namespace OptionType
-// {
-//     template<typename tT>
-//     struct Value
-//     {
-//         static auto GetType()
-//         {
-//             return cxxopts::value<tT>();
-//         }
-//     };
-// 
-//     Value<uint32_t> U32;
-//     Value<uint64_t> U64;
-//     Value<std::string> String;
-// }
+
+
+struct OptionValue
+{
+    OptionValue(const cxxopts::OptionValue &val)
+        : mValue(val)
+    {
+    }
+
+    OptionValue(const OptionValue &other)
+        : mValue(other.mValue)
+    {
+    }
+
+    size_t Count() const
+    {
+        return mValue.count();
+    }
+
+    template<typename tT>
+    const tT& Get() const
+    {
+        return mValue.as<tT>();
+    }
+
+private:
+
+
+    const cxxopts::OptionValue &mValue;
+};
 
 struct Option
 {
@@ -33,12 +48,13 @@ public:
     template<typename tT>
     struct Type
     {
-        auto operator()()
+        auto operator()() const
         {
             return cxxopts::value<tT>();
         }
     };
 
+    static Type<bool> Boolean;
     static Type<uint32_t> U32;
     static Type<uint64_t> U64;
     static Type<int32_t> S32;
@@ -47,17 +63,35 @@ public:
     static Type<double> F64;
     static Type<std::string> String;
 
-//     using fvoid = std::function<void()>;
-//     using fi32 = std::function<void(std::int32_t)>;
-//     using fi64 = std::function<void(std::int64_t)>;
-//     using fu32 = std::function<void(std::uint32_t)>;
-//     using fu64 = std::function<void(std::uint64_t)>;
-//     using ff32 = std::function<void(float)>;
-//     using ff64 = std::function<void(double)>;
+    static Type<std::vector<bool>> BooleanList;
+    static Type<std::vector<uint32_t>> U32List;
+    static Type<std::vector<uint64_t>> U64List;
+    static Type<std::vector<int32_t>> S32List;
+    static Type<std::vector<int64_t>> S64List;
+    static Type<std::vector<float>> F32List;
+    static Type<std::vector<double>> F64List;
+    static Type<std::vector<std::string>> StringList;
+
+    static Type<std::optional<bool>> OptionalBoolean;
+    static Type<std::optional<uint32_t>> OptionalU32;
+    static Type<std::optional<uint64_t>> OptionalU64;
+    static Type<std::optional<int32_t>> OptionalS32;
+    static Type<std::optional<int64_t>> OptionalS64;
+    static Type<std::optional<float>> OptionalF32;
+    static Type<std::optional<double>> OptionalF64;
+    static Type<std::optional<std::string>> OptionalString;
+
+    static Type<std::optional<std::vector<bool>>> OptionalBooleanList;
+    static Type<std::optional<std::vector<uint32_t>>> OptionalU32List;
+    static Type<std::optional<std::vector<uint64_t>>> OptionalU64List;
+    static Type<std::optional<std::vector<int32_t>>> OptionalS32List;
+    static Type<std::optional<std::vector<int64_t>>> OptionalS64List;
+    static Type<std::optional<std::vector<float>>> OptionalF32List;
+    static Type<std::optional<std::vector<double>>> OptionalF64List;
+    static Type<std::optional<std::vector<std::string>>> OptionalStringList;
 
     using ArgumentName = std::variant<std::string_view, std::pair<std::string_view, std::string_view>>;
 
-    //std::shared_ptr<cxxopts::Value> type;
     std::string_view argument;
     std::string_view description;
     std::optional<std::string_view> argHelp;
@@ -67,7 +101,6 @@ public:
     std::optional<std::string_view> implicitValue;
     std::optional<std::string_view> defaultValue;
 
-    //std::variant<std::monostate, fvoid, fi32, fi64, fu32, fu64, ff32, ff64> callback;
     std::any fallback;
     std::shared_ptr<cxxopts::Value> type;
 
@@ -136,34 +169,6 @@ public:
             this->implicitValue = implicitValue.value();
         }
     }
-    
-//     template<typename tT>
-//     Option &Callback(tT callback)
-//     {
-//         this->callback = LambdaToFunction(callback);
-//         return *this;
-//     }
-// 
-// private:
-// 
-//     template<typename T>
-//     struct memfun_type
-//     {
-//         using type = void;
-//     };
-// 
-//     template<typename Ret, typename Class, typename... Args>
-//     struct memfun_type<Ret(Class::*)(Args...) const>
-//     {
-//         using type = std::function<Ret(Args...)>;
-//     };
-// 
-//     template<typename F>
-//     typename memfun_type<decltype(&F::operator())>::type
-//         LambdaToFunction(F const &func)
-//     {
-//         return func;
-//     }
 };
 
 #endif
