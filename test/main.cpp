@@ -34,7 +34,7 @@
 
 TEST(Test, Example)
 {
-    char *argv[] = { "program name", "--name", "3", NULL };
+    const char *argv[] = { "program name", "--name", "3", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args{ "program name" };
@@ -47,7 +47,7 @@ TEST(Test, Example)
 
 TEST(Test, Example2)
 {
-    char *argv[] = { "program name", "--help", NULL };
+    const char *argv[] = { "program name", "--help", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
@@ -61,7 +61,7 @@ TEST(Test, Example2)
 
 TEST(Test, Example3)
 {
-    char *argv[] = { "program name", "--help", NULL };
+    const char *argv[] = { "program name", "--help", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
@@ -74,7 +74,7 @@ TEST(Test, Example3)
 
 TEST(Test, Example4)
 {
-    char *argv[] = { "program name", "--help", NULL };
+    const char *argv[] = { "program name", "--help", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
@@ -87,7 +87,7 @@ TEST(Test, Example4)
 
 TEST(Test, Example5)
 {
-    char *argv[] = { "program name", "--help", NULL };
+    const char *argv[] = { "program name", "--help", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
@@ -100,7 +100,7 @@ TEST(Test, Example5)
 
 TEST(Test, Example6)
 {
-    char *argv[] = { "program name", "--help", NULL };
+    const char *argv[] = { "program name", "--help", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
@@ -113,7 +113,7 @@ TEST(Test, Example6)
 
 TEST(Test, Example7)
 {
-    char *argv[] = { "program name", "--help", NULL };
+    const char *argv[] = { "program name", "--help", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");

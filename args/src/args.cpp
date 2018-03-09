@@ -67,13 +67,20 @@ void Args::SetPositional(std::vector<std::string> &&positional, std::optional<st
     }
 }
 
-void Args::Parse(int& argc, char**& argv)
+void Args::Parse(int argc, char **argv)
 {
-    mResults = new cxxopts::ParseResult(mParser->parse(argc, argv));
+    const char **&cargv = const_cast<const char **&>(argv);
+    mResults = new cxxopts::ParseResult(mParser->parse(argc, cargv));
     if (mResults->count("help"))
     {
         std::cout << mParser->help() << std::endl;
     }
+}
+
+void Args::Parse(int argc, const char **argv)
+{
+    const char **&cargv = const_cast<const char **&>(argv);
+    Parse(argc, cargv);
 }
 
 OptionValue Args::GetOption(std::string_view argument) const
@@ -81,11 +88,11 @@ OptionValue Args::GetOption(std::string_view argument) const
     return mResults->operator[](std::string(argument));
 }
 
-std::vector< std::pair< std::string_view, OptionValue > > Args::GetArguments()
+std::vector< std::pair< std::string_view, OptionValue > > Args::GetArguments() const
 {
     std::vector< std::pair< std::string_view, OptionValue > > result;
 
-    for (auto kv : mResults->arguments())
+    for (const auto &kv : mResults->arguments())
     {
         result.emplace_back(std::make_pair(std::string_view(kv.key()), mResults->operator[](std::string(kv.key()))));
     }

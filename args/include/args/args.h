@@ -57,11 +57,13 @@ public:
 
     void SetPositional(std::vector<std::string> &&positional, std::optional<std::string_view> positionalHelp = std::nullopt);
 
-    void Parse(int& argc, char**& argv);
+    void Parse(int argc, char **argv);
+
+    void Parse(int argc, const char **argv);
 
     OptionValue GetOption(std::string_view argument) const;
 
-    std::vector< std::pair< std::string_view, OptionValue > > GetArguments();
+    std::vector< std::pair< std::string_view, OptionValue > > GetArguments() const;
 
 private:
     cxxopts::Options *mParser;

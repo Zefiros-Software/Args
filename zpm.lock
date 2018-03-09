@@ -31,7 +31,7 @@
   "public": {
     "libraries": [ {
       "definition": "https://github.com/Zefiros-Software/cxxopts.git",
-      "hash": "e40645e0849b57976f5066b4e45d65253947e461",
+      "hash": "0f819a5cabb611ada4c41a5208c6bf1178f804be",
       "name": "Zefiros-Software/cxxopts",
       "repository": "https://github.com/jarro2783/cxxopts.git",
       "tag": "HEAD",
