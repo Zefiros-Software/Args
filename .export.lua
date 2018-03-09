@@ -29,7 +29,7 @@ project "Args"
 
     zpm.export [[
         includedirs "args/include/"
-        cppdialect "C++14"
+        cppdialect "C++17"
 
         zpm.uses "Zefiros-Software/cxxopts"
     ]]
