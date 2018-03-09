@@ -69,7 +69,7 @@ void Args::SetPositional(std::vector<std::string> &&positional, std::optional<st
 
 void Args::Parse(int& argc, char**& argv)
 {
-    mResults = new cxxopts::ParseResult(mParser->parse(int_argc, argv));
+    mResults = new cxxopts::ParseResult(mParser->parse(argc, argv));
     if (mResults->count("help"))
     {
         std::cout << mParser->help() << std::endl;
