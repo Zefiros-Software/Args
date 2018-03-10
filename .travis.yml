@@ -3,25 +3,25 @@ language: generic
 matrix:
   include:
   - os: osx
-    osx_image: xcode8.3
+    osx_image: xcode9.2
     language: generic
     env:
     - BUILD_CONFIG=release
     - BUILD_ARCHITECTURE=x86
   - os: osx
-    osx_image: xcode8.3
+    osx_image: xcode9.2
     language: generic
     env:
     - BUILD_CONFIG=debug
     - BUILD_ARCHITECTURE=x86
   - os: osx
-    osx_image: xcode8.3
+    osx_image: xcode9.2
     language: generic
     env:
     - BUILD_CONFIG=release
     - BUILD_ARCHITECTURE=x86_64
   - os: osx
-    osx_image: xcode8.3
+    osx_image: xcode9.2
     language: generic
     env:
     - BUILD_CONFIG=debug
