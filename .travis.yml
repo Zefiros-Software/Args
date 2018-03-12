@@ -41,32 +41,8 @@ matrix:
   - os: linux
     dist: trusty
     env:
-    - BUILD_CONFIG=release
-    - BUILD_ARCHITECTURE=x86_64
-    - GCC_VERSION=6
-  - os: linux
-    dist: trusty
-    env:
-    - BUILD_CONFIG=debug
-    - BUILD_ARCHITECTURE=x86_64
-    - GCC_VERSION=5
-  - os: linux
-    dist: trusty
-    env:
-    - BUILD_CONFIG=release
-    - BUILD_ARCHITECTURE=x86_64
-    - GCC_VERSION=5
-  - os: linux
-    dist: trusty
-    env:
-    - BUILD_CONFIG=release
-    - BUILD_ARCHITECTURE=x86
-    - GCC_VERSION=5
-  - os: linux
-    dist: trusty
-    env:
     - BUILD_CONFIG=zpm
-    - GCC_VERSION=5
+    - GCC_VERSION=7
 global:
   env:
   - PROJECT=Args
