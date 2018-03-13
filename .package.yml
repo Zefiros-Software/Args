@@ -1,7 +1,7 @@
 public:
   libraries:
     - name: Zefiros-Software/cxxopts
-      version: '>=2.0.0 || @head'
+      version: '>=2.0.0'
 development:
   modules:
     - name: Zefiros-Software/Defaults
