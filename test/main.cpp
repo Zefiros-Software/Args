@@ -38,11 +38,11 @@ TEST(Test, Example)
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args{ "program name" };
-    Option opt( {"n","name"}, "" );//.Callback([](std::int32_t u) { std::cout << "world" << u << std::endl; });
+    Option opt({"n", "name"}, "", Option::U32()); //.Callback([](std::int32_t u) { std::cout << "world" << u << std::endl; });
     //opt.callback = [] { std::cout << "hello" << std::endl; };
     args.AddOption(opt);
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
 }
 
 TEST(Test, Example2)
@@ -52,11 +52,12 @@ TEST(Test, Example2)
 
     Args args("program name");
     //opt.callback = [] { std::cout << "hello" << std::endl; };
-    args.AddOptions({
+    args.AddOptions(
+    {
         { "name", "" }
     });
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
 }
 
 TEST(Test, Example3)
@@ -66,10 +67,10 @@ TEST(Test, Example3)
 
     Args args("program name");
     Option opt = (Option{ "", "Test positional" });//.Callback([](std::int32_t u) { std::cout << "world" << u << std::endl; });
-                                                   //opt.callback = [] { std::cout << "hello" << std::endl; };
+    //opt.callback = [] { std::cout << "hello" << std::endl; };
     args.AddOption(opt);
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
 }
 
 TEST(Test, Example4)
@@ -78,11 +79,12 @@ TEST(Test, Example4)
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
-    args.AddOptions({
+    args.AddOptions(
+    {
         { { "f", "name" }, "", Option::U32() }
-        });
+    });
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
 }
 
 TEST(Test, Example5)
@@ -91,11 +93,12 @@ TEST(Test, Example5)
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
-    args.AddOptions({
+    args.AddOptions(
+    {
         { { "f", "name" }, "", Option::U32(), "321"}
-        });
+    });
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
 }
 
 TEST(Test, Example6)
@@ -104,11 +107,12 @@ TEST(Test, Example6)
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
-    args.AddOptions({
+    args.AddOptions(
+    {
         { { "f", "name" }, "weff wefwef", Option::U32(), std::nullopt, "321" }
-        });
+    });
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
 }
 
 TEST(Test, Example7)
@@ -117,11 +121,27 @@ TEST(Test, Example7)
     int argc = sizeof(argv) / sizeof(char *) - 1;
 
     Args args("program name");
-    args.AddOptions({
+    args.AddOptions(
+    {
         { { "f", "name" }, "weff wefwef", "help", Option::U32(), "321" }
-        });
+    });
 
-    args.Parse(argc, argv);
+    args.Parse(argc, argv, false);
+}
+
+TEST(Test, Example8)
+{
+    const char *argv[] = { "program name", NULL };
+    int argc = sizeof(argv) / sizeof(char *) - 1;
+
+    Args args("program name");
+    args.AddOptions(
+    {
+        { { "f", "name" }, "weff wefwef", "help", Option::U32(), "321" }
+    });
+
+    args.Parse(argc, argv, false);
+    uint32_t f = args.GetOption("name").Get<uint32_t>();
 }
 
 int main(int argc, char **argv)

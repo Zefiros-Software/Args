@@ -31,11 +31,12 @@
   "public": {
     "libraries": [ {
       "definition": "https://github.com/Zefiros-Software/cxxopts.git",
-      "hash": "0f819a5cabb611ada4c41a5208c6bf1178f804be",
+      "hash": "8893afe13cc47dd0be4f25b5ae491e652c146098",
       "name": "Zefiros-Software/cxxopts",
       "repository": "https://github.com/jarro2783/cxxopts.git",
-      "tag": "HEAD",
-      "versionRequirement": ">=2.0.0 || @head"
+      "tag": "v2.0.0",
+      "version": "2.0.0",
+      "versionRequirement": ">=2.0.0"
     } ]
   },
   "repository": "./"

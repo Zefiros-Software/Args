@@ -69,7 +69,8 @@ void Args::SetPositional(std::vector<std::string> &&positional, std::optional<st
 
 void Args::Parse(int argc, const char **argv, bool exitOnHelp /*= true*/)
 {
-    mResults = new cxxopts::ParseResult(mParser->parse(argc, argv));
+    // @todo: remove the const_cast once the new cxxopts is released
+    mResults = new cxxopts::ParseResult(mParser->parse(argc, const_cast<char ** &>(argv)));
 
     if (mResults->count("help"))
     {
