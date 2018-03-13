@@ -57,8 +57,6 @@ public:
 
     void SetPositional(std::vector<std::string> &&positional, std::optional<std::string_view> positionalHelp = std::nullopt);
 
-    void Parse(int argc, char **argv);
-
     void Parse(int argc, const char **argv);
 
     OptionValue GetOption(std::string_view argument) const;

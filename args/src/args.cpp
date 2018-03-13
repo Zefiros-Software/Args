@@ -67,22 +67,9 @@ void Args::SetPositional(std::vector<std::string> &&positional, std::optional<st
     }
 }
 
-void Args::Parse(int argc, char **argv)
-{
-#ifdef _MSC_VER
-    mResults = new cxxopts::ParseResult(mParser->parse(argc, argv));
-#else
-    mResults = new cxxopts::ParseResult(mParser->parse(argc, (const char**&)argv));
-#endif
-    if (mResults->count("help"))
-    {
-        std::cout << mParser->help() << std::endl;
-    }
-}
-
 void Args::Parse(int argc, const char **argv)
 {
-    Parse(argc, const_cast<char **>(argv));
+    mResults = new cxxopts::ParseResult(mParser->parse(argc, argv));
 }
 
 OptionValue Args::GetOption(std::string_view argument) const
