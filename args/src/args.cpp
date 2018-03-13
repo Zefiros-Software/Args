@@ -67,19 +67,24 @@ void Args::SetPositional(std::vector<std::string> &&positional, std::optional<st
     }
 }
 
-void Args::Parse(int argc, const char **argv)
+void Args::Parse(int argc, const char **argv, bool exitOnHelp /*= true*/)
 {
     mResults = new cxxopts::ParseResult(mParser->parse(argc, argv));
 
     if (mResults->count("help"))
     {
         std::cout << mParser->help() << std::endl;
+
+        if (exitOnHelp)
+        {
+            exit(EXIT_SUCCESS);
+        }
     }
 }
 
-void Args::Parse(int argc, char **argv)
+void Args::Parse(int argc, char **argv, bool exitOnHelp /*= true*/)
 {
-    Parse(argc, (const char **)argv);
+    Parse(argc, (const char **)argv, exitOnHelp);
 }
 
 OptionValue Args::GetOption(std::string_view argument) const

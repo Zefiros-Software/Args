@@ -1,7 +1,7 @@
 /**
  * @cond ___LICENSE___
  *
- * Copyright (c) 2018 Zefiros Software.
+ * Copyright (c) 2016-2018 Zefiros Software.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  *
  * @endcond
- *
  */
 
 #pragma once
@@ -57,9 +56,9 @@ public:
 
     void SetPositional(std::vector<std::string> &&positional, std::optional<std::string_view> positionalHelp = std::nullopt);
 
-    void Parse(int argc, const char **argv);
+    void Parse(int argc, const char **argv, bool exitOnHelp = true);
 
-    void Parse(int argc, char **argv);
+    void Parse(int argc, char **argv, bool exitOnHelp = true);
 
     OptionValue GetOption(std::string_view argument) const;
 
