@@ -72,6 +72,7 @@ public:
     static std::shared_ptr<cxxopts::Value> F64List() { return Type<std::vector<double>>()();};
     static std::shared_ptr<cxxopts::Value> StringList() { return Type<std::vector<std::string>>()();};
 
+    /*
     static std::shared_ptr<cxxopts::Value> OptionalBoolean() { return Type<std::optional<bool>>()();};
     static std::shared_ptr<cxxopts::Value> OptionalU32() { return Type<std::optional<uint32_t>>()();};
     static std::shared_ptr<cxxopts::Value> OptionalU64() { return Type<std::optional<uint64_t>>()();};
@@ -89,6 +90,7 @@ public:
     static std::shared_ptr<cxxopts::Value> OptionalF32List() { return Type<std::optional<std::vector<float>>>()();};
     static std::shared_ptr<cxxopts::Value> OptionalF64List() { return Type<std::optional<std::vector<double>>>()();};
     static std::shared_ptr<cxxopts::Value> OptionalStringList() { return Type<std::optional<std::vector<std::string>>>()();};
+    */
 
     using ArgumentName = std::variant<std::string_view, std::pair<std::string_view, std::string_view>>;
 
