@@ -27,6 +27,8 @@
 project "Args"
     kind "StaticLib"
 
+    files "args/src/**.cpp"
+
     zpm.export [[
         includedirs "args/include/"
         cppdialect "C++17"
