@@ -77,7 +77,7 @@ void Args::Parse(int argc, const char **argv)
     }
 }
 
-void Args::Parse(int argc, const char **argv)
+void Args::Parse(int argc, char **argv)
 {
     Parse(argc, (const char **)argv);
 }
