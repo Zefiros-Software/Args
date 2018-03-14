@@ -28,6 +28,8 @@
 #ifndef __ARGS_H__
 #define __ARGS_H__
 
+#include "args/option.h"
+
 #define CXXOPTS_HAS_OPTIONAL
 #include "cxxopts.hpp"
 
@@ -40,9 +42,6 @@ namespace cxxopts
 {
     class Options;
 }
-
-struct Option;
-struct OptionValue;
 
 class Args
 {

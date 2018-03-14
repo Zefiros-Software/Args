@@ -27,8 +27,6 @@
 #ifndef __OPTIONS_H__
 #define __OPTIONS_H__
 
-#include "args/args.h"
-
 #include <functional>
 #include <optional>
 #include <variant>
@@ -36,6 +34,8 @@
 
 #define CXXOPTS_HAS_OPTIONAL
 #include "cxxopts.hpp"
+
+class Args;
 
 struct OptionValue
 {
