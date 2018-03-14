@@ -1,6 +1,33 @@
+/**
+ * @cond ___LICENSE___
+ *
+ * Copyright (c) 2016-2018 Zefiros Software.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @endcond
+ */
 #pragma once
 #ifndef __OPTIONS_H__
 #define __OPTIONS_H__
+
+#include "args/args.h"
 
 #include <functional>
 #include <optional>
@@ -10,17 +37,17 @@
 #define CXXOPTS_HAS_OPTIONAL
 #include "cxxopts.hpp"
 
-
-
 struct OptionValue
 {
-    OptionValue(const cxxopts::OptionValue &val)
-        : mValue(val)
+    OptionValue(const cxxopts::OptionValue &val, const Args &args)
+        : mValue(val),
+          mArgs(args)
     {
     }
 
     OptionValue(const OptionValue &other)
-        : mValue(other.mValue)
+        : mValue(other.mValue),
+          mArgs(other.mArgs)
     {
     }
 
@@ -30,15 +57,23 @@ struct OptionValue
     }
 
     template<typename tT>
-    const tT& Get() const
+    const tT &Get() const
     {
-        return mValue.as<tT>();
+        if (Count())
+        {
+            return mValue.as<tT>();
+        }
+        else
+        {
+            mArgs.Help();
+            exit(EXIT_FAILURE);
+        }
     }
 
 private:
 
-
     const cxxopts::OptionValue &mValue;
+    const Args &mArgs;
 };
 
 struct Option
@@ -106,66 +141,77 @@ public:
     std::any fallback;
     std::shared_ptr<cxxopts::Value> type;
 
-    Option(std::string_view argument, std::string_view description, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
+    Option(std::string_view argument, std::string_view description, std::shared_ptr<cxxopts::Value> type = nullptr,
+           std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
         : argument(argument),
-        description(description),
-        abbreviation(std::nullopt),
-        type(type)
+          description(description),
+          abbreviation(std::nullopt),
+          type(type)
     {
         if (defaultValue.has_value())
         {
             this->defaultValue = defaultValue.value();
         }
+
         if (implicitValue.has_value())
         {
             this->implicitValue = implicitValue.value();
         }
     }
 
-    Option(std::pair<std::string_view, std::string_view> argument, std::string_view description, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
+    Option(std::pair<std::string_view, std::string_view> argument, std::string_view description,
+           std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view>
+           implicitValue = {})
         : argument(argument.second),
-        description(description),
-        abbreviation(argument.first),
-        type(type)
+          description(description),
+          abbreviation(argument.first),
+          type(type)
     {
         if (defaultValue.has_value())
         {
             this->defaultValue = defaultValue.value();
         }
+
         if (implicitValue.has_value())
         {
             this->implicitValue = implicitValue.value();
         }
     }
 
-    Option(std::string_view argument, std::string_view description, std::string_view argHelp, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
+    Option(std::string_view argument, std::string_view description, std::string_view argHelp,
+           std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view>
+           implicitValue = {})
         : argument(argument),
-        description(description),
-        argHelp(argHelp),
-        abbreviation(std::nullopt),
-        type(type)
+          description(description),
+          argHelp(argHelp),
+          abbreviation(std::nullopt),
+          type(type)
     {
         if (defaultValue.has_value())
         {
             this->defaultValue = defaultValue.value();
         }
+
         if (implicitValue.has_value())
         {
             this->implicitValue = implicitValue.value();
         }
     }
 
-    Option(std::pair<std::string_view, std::string_view> argument, std::string_view description, std::string_view argHelp, std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view> implicitValue = {})
+    Option(std::pair<std::string_view, std::string_view> argument, std::string_view description, std::string_view argHelp,
+           std::shared_ptr<cxxopts::Value> type = nullptr, std::optional<std::string_view> defaultValue = {}, std::optional<std::string_view>
+           implicitValue = {})
         : argument(argument.second),
-        description(description),
-        argHelp(argHelp),
-        abbreviation(argument.first),
-        type(type)
+          description(description),
+          argHelp(argHelp),
+          abbreviation(argument.first),
+          type(type)
     {
         if (defaultValue.has_value())
         {
             this->defaultValue = defaultValue.value();
         }
+
         if (implicitValue.has_value())
         {
             this->implicitValue = implicitValue.value();

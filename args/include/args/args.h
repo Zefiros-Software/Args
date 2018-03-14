@@ -28,10 +28,12 @@
 #ifndef __ARGS_H__
 #define __ARGS_H__
 
-#include "args/option.h"
+#define CXXOPTS_HAS_OPTIONAL
+#include "cxxopts.hpp"
 
 #include <unordered_map>
 #include <string_view>
+#include <optional>
 #include <iosfwd>
 
 namespace cxxopts
@@ -39,6 +41,8 @@ namespace cxxopts
     class Options;
 }
 
+struct Option;
+struct OptionValue;
 
 class Args
 {
@@ -60,9 +64,11 @@ public:
 
     void Parse(int argc, char **argv, bool exitOnHelp = true);
 
+    void Help() const;
+
     OptionValue GetOption(std::string_view argument) const;
 
-    std::vector< std::pair< std::string_view, OptionValue > > GetArguments() const;
+    std::vector<std::pair<std::string_view, OptionValue >> GetArguments() const;
 
 private:
     cxxopts::Options *mParser;

@@ -141,7 +141,7 @@ TEST(Test, Example8)
     });
 
     args.Parse(argc, argv, false);
-    uint32_t f = args.GetOption("name").Get<uint32_t>();
+    ASSERT_EXIT(args.GetOption("name").Get<uint32_t>(), ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
 int main(int argc, char **argv)
