@@ -75,7 +75,7 @@ private:
     const cxxopts::OptionValue &mValue;
     const Args &mArgs;
 
-    void ShowHelp();
+    void ShowHelp() const;
 };
 
 struct Option
