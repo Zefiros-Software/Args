@@ -131,6 +131,23 @@ TEST(Test, Example7)
 
 TEST(Test, Example8)
 {
+    const char *argv[] = { "program name", "--name", "42", NULL };
+    int argc = sizeof(argv) / sizeof(char *) - 1;
+
+    Args args("program name");
+    args.AddOptions(
+    {
+        { { "f", "name" }, "weff wefwef", "help", Option::U32(), "321" }
+    });
+
+    args.Parse(argc, argv, false);
+
+    uint32_t name = args.GetOption("name");
+    EXPECT_EQ(name, 42);
+}
+
+TEST(Test, Example9)
+{
     const char *argv[] = { "program name", NULL };
     int argc = sizeof(argv) / sizeof(char *) - 1;
 

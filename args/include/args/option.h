@@ -70,6 +70,18 @@ struct OptionValue
         }
     }
 
+    operator const bool &() const { return Get<bool>(); }
+    operator const uint32_t &() const { return Get<uint32_t>(); }
+    operator const uint64_t &() const { return Get<uint64_t>(); }
+    operator const int32_t &() const { return Get<int32_t>(); }
+    operator const int64_t &() const { return Get<int64_t>(); }
+    operator const float &() const { return Get<float>(); }
+    operator const double &() const { return Get<double>(); }
+    operator const std::string &() const { return Get<std::string>(); }
+    
+    template<typename = std::enable_if<!std::is_same_v<size_t, uint32_t> && !std::is_same_v<size_t, uint64_t>>>
+    operator const size_t &() const { return Get<size_t>(); }
+
 private:
 
     const cxxopts::OptionValue &mValue;
@@ -94,6 +106,7 @@ public:
     static std::shared_ptr<cxxopts::Value> Boolean() { return Type<bool>()();};
     static std::shared_ptr<cxxopts::Value> U32() { return Type<uint32_t>()();};
     static std::shared_ptr<cxxopts::Value> U64() { return Type<uint64_t>()();};
+    static std::shared_ptr<cxxopts::Value> SizeT() { return Type<size_t>()();};
     static std::shared_ptr<cxxopts::Value> S32() { return Type<int32_t>()();};
     static std::shared_ptr<cxxopts::Value> S64() { return Type<int64_t>()();};
     static std::shared_ptr<cxxopts::Value> F32() { return Type<float>()();};
