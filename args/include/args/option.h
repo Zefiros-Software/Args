@@ -65,7 +65,7 @@ struct OptionValue
         }
         else
         {
-            mArgs.Help();
+            ShowHelp();
             exit(EXIT_FAILURE);
         }
     }
@@ -74,6 +74,8 @@ private:
 
     const cxxopts::OptionValue &mValue;
     const Args &mArgs;
+
+    void ShowHelp();
 };
 
 struct Option
