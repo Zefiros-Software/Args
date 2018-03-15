@@ -143,7 +143,7 @@ TEST(Test, Example8)
     args.Parse(argc, argv, false);
 
     uint32_t name = args.GetOption("name");
-    EXPECT_EQ(name, 42);
+    EXPECT_EQ(name, 42u);
 }
 
 TEST(Test, Example9)

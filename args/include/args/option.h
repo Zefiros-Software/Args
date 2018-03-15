@@ -59,7 +59,7 @@ struct OptionValue
     template<typename tT>
     const tT &Get() const
     {
-        if (Count())
+        if (Count() > 0)
         {
             return mValue.as<tT>();
         }

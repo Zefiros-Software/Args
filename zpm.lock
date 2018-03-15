@@ -4,12 +4,12 @@
   "private": {
     "modules": [ {
       "definition": "https://github.com/Zefiros-Software/ZefirosDefaults.git",
-      "hash": "8f5a602c5d3bf2f0e6228a2c2b82f2c973ba4cb1",
+      "hash": "a539f143ed71c341db0acde5e13faabdc3925e3d",
       "name": "Zefiros-Software/Defaults",
       "public": {
         "libraries": [ {
           "definition": "https://github.com/Zefiros-Software/GoogleTest.git",
-          "hash": "9bda90b7e5e08c4c37a832d0cea218aed6af6470",
+          "hash": "a325ad2db5deb623eab740527e559b81c0f39d65",
           "name": "Zefiros-Software/GoogleTest",
           "repository": "https://github.com/google/googletest.git",
           "tag": "HEAD",
