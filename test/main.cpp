@@ -158,7 +158,7 @@ TEST(Test, Example9)
     });
 
     args.Parse(argc, argv, false);
-    ASSERT_DEATH(args.GetOption("name").Get<uint32_t>(), "");
+    ASSERT_EXIT(args.GetOption("name").Get<uint32_t>(), ::testing::ExitedWithCode(EXIT_FAILURE), "");
 }
 
 int main(int argc, char **argv)
