@@ -4,6 +4,7 @@ environment:
   PROJECT: Args
   PROJECT_DIRECTORY: args
   VS_VERSION: vs2017
+  APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
   matrix:  
     - TYPE: zpm
     - BUILD_CONFIG: release
