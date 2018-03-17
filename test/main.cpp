@@ -170,7 +170,7 @@ int main(int argc, char **argv)
     _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
     //_crtBreakAlloc = 0;
 #endif
-
+    ::testing::FLAGS_gtest_death_test_style = "threadsafe";
     ::testing::InitGoogleTest(&argc, argv);
 
     int32_t result = ::testing::UnitTest::GetInstance()->Run();
